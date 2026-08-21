@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>CƠ SỞ DỮ LIỆU NGÀNH GIÁO DỤC VÀ ĐÀO TẠO</title>
+
+<style>
+
+/* ===== HIỆU ỨNG MƯỢT ===== */
+input, select, button{
+    transition: all 0.25s ease;
+}
+
+input:hover, select:hover{
+    border-color:#8B1C3F;
+    box-shadow:0 0 5px rgba(139,28,63,0.3);
+}
+
+input:focus, select:focus{
+    border-color:#8B1C3F;
+    outline:none;
+    box-shadow:0 0 8px rgba(139,28,63,0.5);
+}
+
+.login-btn:hover{
+    background:#a52a4f;
+    transform: translateY(-2px);
+}
+
+.login-btn:active{
+    transform: scale(0.96);
+}
+
+.main{
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+body{
+    margin:0;
+    font-family: Cambria;
+    background:#f2f2f2;
+}
+
+/* HEADER */
+.header{
+    background:#82C836;
+    color:white;
+    padding:15px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+.title1{
+    color:white;font-weight:noramal;
+    font-size:18px;
+}
+.title2{
+    color:white;font-weight:bold;
+    font-size:18px;
+}
+.title3{
+    color:yellow;font-weight:noramal;
+    font-size:18px;
+}
+
+/* MAIN */
+.main{
+    width:950px;
+    margin:30px auto;
+    display:flex;
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* LEFT */
+.left{width:50%;}
+
+/* RIGHT */
+.right{width:50%;padding:25px;}
+
+/* INPUT */
+input,select{
+    width:100%;
+    padding:10px;
+    margin:6px 0;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+.label{font-weight:bold;margin-top:10px;}
+
+/* CAPTCHA */
+.captcha{display:flex;gap:6px;}
+.code{
+    width:90px;
+    background:#ddd;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    border-radius:6px;
+}
+
+/* CHECKBOX */
+.remember{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:14px;
+}
+
+.remember input{
+    width:16px;
+    height:16px;
+    accent-color:#00B050;
+}
+
+/* BUTTON */
+.login-btn{
+    width:100%;
+    padding:10px;
+    background:#00B050;
+    color:white;
+    border:none;
+    border-radius:8px;
+    margin-top:10px;
+}
+
+/* VNEID */
+.vneid{
+    margin-top:10px;
+    padding:10px;
+    border:1px solid #4caf50;
+    color:#4caf50;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    border-radius:8px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+<img src="Picture2.png" style="height:70px;">
+<div>
+<div class="title1">BỘ Y TẾ</div>
+<div class="title2">BỆNH VIỆN CHỈNH HÌNH VÀ PHỤC HỒI ĐA CHỨC NĂNG QUỐC GIA</div>
+<div class="title3">NATIONAL HOSPITAL OF ORTHOPEDICS AND MULTIDISCIPLINARY REHABILITATION</div>
+</div>
+</div>
+
+<div class="main">
+
+<!-- LEFT -->
+<div class="left">
+<img src="bieudo.png" style="width:100%;height:100%;object-fit:cover;">
+</div>
+
+<!-- RIGHT -->
+<div class="right">
+<!-- TITLE -->
+<div style="display:flex;align-items:center;gap:10px;">
+<img src="Bo Y Te.svg" style="height:50px;">
+<div>
+<h2 style="margin:0;">ĐĂNG NHẬP HỆ THỐNG</h2>
+<div style="color:#666;font-size:14px;">HỆ THỐNG QUẢN LÝ BỆNH VIỆN CẤP TRUNG ƯƠNG - BỘ Y TẾ</div>
+</div>
+</div>
+
+<!-- ACCOUNT -->
+<div class="label">Tài khoản của bạn</div>
+<input id="username" placeholder="Tên đăng nhập">
+<input id="password" type="password" placeholder="Mật khẩu">
+
+<!-- UNIT -->
+<div class="label">Thông tin đơn vị</div>
+
+<select id="level" onchange="loadSchool()">
+<option>Chọn khoa</option>
+<option>Khoa Chỉnh hình và Phục hồi chức năng</option>
+<option>Khoa Nội tạng (Tim mạch, Phổi, Gan, Dạ dày, Thận)</option>
+<option>Khoa sản phụ thai</option>
+<option>Khoa Tai, mũi, họng</option>
+<option>Khoa Thần kinh, não</option>
+</select>
+
+<select id="ward" onchange="loadSchool()">
+<option>Chọn Chức vụ</option> 
+<option>Thực tập sinh</option> 
+<option>Bác sĩ</option> 
+<option>Y tá</option> 
+<option>Bác sĩ phẫu thuật</option> 
+<option>Bác sĩ khám</option> 
+<option>Phó phòng</option> 
+<option>Trưởng phòng</option> 
+<option>Giám đốc bệnh viện</option> 
+</select>
+
+<select id="school">
+<option>Chọn cơ sở</option>
+<option>Cơ sở chính (Số: 00871249329)</option> 
+<option>Cơ sở 1 (Số: 125977460236)</option> 
+<option>Cơ sở 2 (Số: 299864399284)</option> 
+<option>Cơ sở 3 (Số: 380976359702)</option> 
+<option>Cơ sở 4 (Số: 490455234809)</option> 
+<option>Cơ sở 5 (Số: 596782308920)</option> 
+</select>
+
+<!-- CAPTCHA -->
+<div class="captcha">
+<input placeholder="(Hoặc sử dụng Fingerprint ID)">
+<img src="VT.jpg" style="height:50px;">
+</div>
+
+<!-- CHECKBOX -->
+<div class="remember">
+<input type="checkbox" id="remember">
+<label for="remember">Ghi nhớ tài khoản</label>
+</div>
+
+<button class="login-btn" onclick="login()">Đăng nhập</button>
+
+<!-- VNEID -->
+<div class="vneid">
+<img src="ytXH_logo.png" style="height:25px;">
+<span>Đăng nhập bằng tài khoản BHYT Xã hội Việt Nam</span>
+</div>
+
+</div>
+</div>
+
+<!-- JS -->
+<script>
+
+function login(){
+
+let user = document.getElementById("username").value;
+let pass = document.getElementById("password").value;
+let remember = document.getElementById("remember").checked;
+
+let accounts = {
+    "tranbinh@1804":"Binh_naBVQG",
+
+};
+
+if(accounts[user] && accounts[user] === pass){
+
+    // lưu đăng nhập
+    if(remember){
+        localStorage.setItem("user", user);
+    }
+
+    // 🚀 CHUYỂN TRANG THẬT
+    window.location.href = "Mẹ iu.html";
+
+}else{
+    alert("Sai tài khoản ❌");
+}
+
+}
+
+</script>
+
+</body>
+</html>
